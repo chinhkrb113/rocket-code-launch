@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CountdownTimer from "@/components/CountdownTimer";
+import CodingGame from "@/components/CodingGame";
 import heroBanner from "@/assets/hero-banner.jpg";
 import instructor1 from "@/assets/instructor-1.jpg";
 import studentProjects from "@/assets/student-projects.jpg";
@@ -173,6 +174,22 @@ const Index = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Interactive Coding Game Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              🎮 Học lập trình qua trò chơi
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Thử ngay game lập trình tương tác! Học cách sử dụng loops, điều kiện và biến 
+              thông qua việc điều khiển rocket đến ngôi sao.
+            </p>
+          </div>
+          <CodingGame />
         </div>
       </section>
 
