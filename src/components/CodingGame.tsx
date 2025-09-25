@@ -27,7 +27,7 @@ const DIRECTIONS = [
   { x: -1, y: 0 }  // left
 ];
 
-const DIRECTION_EMOJIS = ['⬆️', '➡️', '⬇️', '⬅️'];
+const DIRECTION_EMOJIS = ['🚀', '🚀', '🚀', '🚀'];
 
 const CodingGame = () => {
   const [gameState, setGameState] = useState<GameState>({
@@ -79,7 +79,7 @@ move();`);
 
     const log: string[] = [];
 
-    const move = () => {
+    const move = async () => {
       const direction = DIRECTIONS[currentState.rocketDirection];
       const newPos = {
         x: currentState.rocketPos.x + direction.x,
@@ -88,7 +88,17 @@ move();`);
 
       if (isValidPosition(newPos)) {
         currentState.rocketPos = newPos;
-        log.push(`Rocket di chuyển đến (${newPos.x}, ${newPos.y})`);
+        log.push(`🚀 Rocket di chuyển đến (${newPos.x}, ${newPos.y})`);
+        
+        // Update UI immediately for smooth animation
+        setGameState(prev => ({
+          ...prev,
+          rocketPos: { ...currentState.rocketPos }
+        }));
+        
+        // Small delay for visual feedback
+        await new Promise(resolve => setTimeout(resolve, 400));
+        
         return true;
       } else {
         log.push(`❌ Không thể di chuyển ra ngoài lưới!`);
@@ -96,20 +106,36 @@ move();`);
       }
     };
 
-    const turnRight = () => {
+    const turnRight = async () => {
       currentState.rocketDirection = (currentState.rocketDirection + 1) % 4;
-      log.push(`Rocket xoay phải ${DIRECTION_EMOJIS[currentState.rocketDirection]}`);
+      log.push(`🔄 Rocket xoay phải`);
+      
+      // Update UI for rotation
+      setGameState(prev => ({
+        ...prev,
+        rocketDirection: currentState.rocketDirection
+      }));
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
     };
 
-    const turnLeft = () => {
+    const turnLeft = async () => {
       currentState.rocketDirection = (currentState.rocketDirection + 3) % 4;
-      log.push(`Rocket xoay trái ${DIRECTION_EMOJIS[currentState.rocketDirection]}`);
+      log.push(`🔄 Rocket xoay trái`);
+      
+      // Update UI for rotation
+      setGameState(prev => ({
+        ...prev,
+        rocketDirection: currentState.rocketDirection
+      }));
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
     };
 
-    const repeat = (times: number, commands: (() => boolean | void)[]) => {
+    const repeat = async (times: number, commands: (() => Promise<boolean | void> | boolean | void)[]) => {
       for (let i = 0; i < times; i++) {
         for (const command of commands) {
-          const result = command();
+          const result = await command();
           if (result === false) return false;
         }
       }
@@ -126,11 +152,11 @@ move();`);
         const trimmedLine = line.trim();
         
         if (trimmedLine === 'move();') {
-          if (!move()) break;
+          if (!(await move())) break;
         } else if (trimmedLine === 'turnRight();') {
-          turnRight();
+          await turnRight();
         } else if (trimmedLine === 'turnLeft();') {
-          turnLeft();
+          await turnLeft();
         } else if (trimmedLine.startsWith('repeat(')) {
           // Simple repeat parser for basic cases
           const match = trimmedLine.match(/repeat\((\d+),\s*\[(.*?)\]\);/);
@@ -139,24 +165,16 @@ move();`);
             const commandsStr = match[2];
             const commands = commandsStr.split(',').map(cmd => cmd.trim().replace(/['"]/g, ''));
             
-            const commandFunctions: (() => boolean | void)[] = [];
+            const commandFunctions: (() => Promise<boolean | void> | boolean | void)[] = [];
             for (const cmd of commands) {
               if (cmd === 'move()') commandFunctions.push(move);
               else if (cmd === 'turnRight()') commandFunctions.push(turnRight);
               else if (cmd === 'turnLeft()') commandFunctions.push(turnLeft);
             }
             
-            if (!repeat(times, commandFunctions)) break;
+            if (!(await repeat(times, commandFunctions))) break;
           }
         }
-
-        // Update UI with animation delay
-        await new Promise(resolve => setTimeout(resolve, 800));
-        setGameState(prev => ({
-          ...prev,
-          rocketPos: { ...currentState.rocketPos },
-          rocketDirection: currentState.rocketDirection
-        }));
       }
 
       setExecutionLog(log);
@@ -210,17 +228,24 @@ move();`);
                   return (
                     <div
                       key={index}
-                      className={`aspect-square flex items-center justify-center text-2xl rounded border-2 transition-all duration-300 ${
+                      className={`aspect-square flex items-center justify-center text-2xl rounded border-2 transition-all duration-500 ${
                         isRocket 
-                          ? 'bg-blue-200 dark:bg-blue-800 border-blue-400 scale-110' 
+                          ? 'bg-blue-200 dark:bg-blue-800 border-blue-400 scale-110 shadow-lg' 
                           : isTarget 
                           ? 'bg-yellow-200 dark:bg-yellow-800 border-yellow-400' 
                           : 'bg-white dark:bg-slate-700 border-slate-300 dark:border-slate-600'
                       }`}
                     >
                       {isRocket && (
-                        <span className="animate-bounce">
-                          {DIRECTION_EMOJIS[gameState.rocketDirection]}
+                        <span 
+                          className={`text-3xl transition-transform duration-300 ${
+                            gameState.isRunning ? 'animate-pulse scale-110' : ''
+                          }`}
+                          style={{
+                            transform: `rotate(${gameState.rocketDirection * 90}deg)`
+                          }}
+                        >
+                          🚀
                         </span>
                       )}
                       {isTarget && <span className="animate-pulse">⭐</span>}
