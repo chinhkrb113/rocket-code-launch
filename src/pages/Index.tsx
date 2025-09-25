@@ -28,6 +28,7 @@ import {
   Mail,
   MessageCircle,
 } from "lucide-react";
+import { CodingTestCTA } from "@/features/coding-test";
 
 const Index = () => {
   const { toast } = useToast();
@@ -98,9 +99,10 @@ const Index = () => {
               </div>
               
               <div className="space-y-4">
-                <Button size="xl" variant="hero" className="animate-scale-in">
-                  👉 Làm Bài Test Miễn Phí Ngay
-                </Button>
+                <CodingTestCTA 
+                  label="Làm Bài Test Miễn Phí Ngay"
+                  className="animate-scale-in"
+                />
                 <p className="text-sm text-muted-foreground">
                   Xác định trình độ lập trình của con chỉ trong 5 phút – nhận ngay báo cáo kết quả & lộ trình học phù hợp.
                 </p>
