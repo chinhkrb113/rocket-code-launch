@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CountdownTimer from "@/components/CountdownTimer";
 import heroBanner from "@/assets/hero-banner.jpg";
 import instructor1 from "@/assets/instructor-1.jpg";
 import studentProjects from "@/assets/student-projects.jpg";
@@ -393,13 +394,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Countdown & Pricing Section */}
+      <CountdownTimer />
+      
+      {/* Additional Pricing Details */}
       <section id="pricing" className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <Card className="shadow-large bg-gradient-to-r from-primary/5 to-secondary/5">
             <CardHeader className="text-center">
               <CardTitle className="text-3xl mb-4">
-                📅 Lịch khai giảng + Học phí + Ưu đãi
+                📋 Chi tiết khóa học & Đăng ký
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -407,7 +411,7 @@ const Index = () => {
                 <div className="space-y-3">
                   <Calendar className="text-primary mx-auto" size={32} />
                   <h3 className="text-xl font-semibold">Khai giảng</h3>
-                  <p className="text-2xl font-bold text-primary">15/10/2025</p>
+                  <p className="text-2xl font-bold text-primary">15/10/2024</p>
                 </div>
 
                 <div className="space-y-3">
