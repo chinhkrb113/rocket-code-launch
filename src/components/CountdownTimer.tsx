@@ -6,30 +6,31 @@ import { Calendar, DollarSign, Gift } from "lucide-react";
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    minutes: 59,
+    seconds: 59,
   });
 
   useEffect(() => {
-    const targetDate = new Date("2024-10-15T00:00:00").getTime();
-
     const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        clearInterval(timer);
-      }
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) {
+          return {
+            ...prev,
+            seconds: prev.seconds - 1,
+          };
+        } else if (prev.minutes > 0) {
+          return {
+            minutes: prev.minutes - 1,
+            seconds: 59,
+          };
+        } else {
+          // Reset to 59:59 when it reaches 0:0
+          return {
+            minutes: 59,
+            seconds: 59,
+          };
+        }
+      });
     }, 1000);
 
     return () => clearInterval(timer);
@@ -51,36 +52,20 @@ const CountdownTimer = () => {
             </div>
 
             {/* Countdown Display */}
-            <div className="grid grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-8 mb-8 justify-center max-w-md mx-auto">
               <div className="text-center">
-                <div className="text-4xl lg:text-6xl font-bold text-orange-400 mb-2">
-                  {timeLeft.days.toString().padStart(2, "0")}
-                </div>
-                <div className="text-sm lg:text-base text-slate-300 font-medium">
-                  NGÀY
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl lg:text-6xl font-bold text-orange-400 mb-2">
-                  {timeLeft.hours.toString().padStart(2, "0")}
-                </div>
-                <div className="text-sm lg:text-base text-slate-300 font-medium">
-                  GIỜ
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl lg:text-6xl font-bold text-orange-400 mb-2">
+                <div className="text-6xl lg:text-8xl font-bold text-orange-400 mb-2">
                   {timeLeft.minutes.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm lg:text-base text-slate-300 font-medium">
+                <div className="text-base lg:text-xl text-slate-300 font-medium">
                   PHÚT
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-4xl lg:text-6xl font-bold text-orange-400 mb-2">
+                <div className="text-6xl lg:text-8xl font-bold text-orange-400 mb-2">
                   {timeLeft.seconds.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm lg:text-base text-slate-300 font-medium">
+                <div className="text-base lg:text-xl text-slate-300 font-medium">
                   GIÂY
                 </div>
               </div>
