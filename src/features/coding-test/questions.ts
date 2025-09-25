@@ -16,63 +16,78 @@ export const QUESTIONS: Question[] = [
   {
     id: "q1",
     level: "beginner",
-    text: "Robot đi 3 bước phải và 2 bước xuống. Vị trí cuối cùng là?",
-    choices: ["3 bước phải", "2 bước xuống", "3 phải & 2 xuống", "Về điểm đầu"],
+    text: "Một con robot có thể di chuyển theo 4 hướng: trái, phải, lên, xuống.\nNếu robot đi 3 bước sang phải và 2 bước xuống, vị trí cuối cùng của robot so với điểm xuất phát là gì?",
+    choices: [
+      "Cách 3 bước sang phải",
+      "Cách 2 bước xuống", 
+      "Cách 3 bước phải và 2 bước xuống",
+      "Quay lại vị trí ban đầu"
+    ],
     answerIndex: 2,
-    explain: "X=+3, Y=-2 so với gốc."
+    explain: "Robot di chuyển 3 bước phải và 2 bước xuống, vậy vị trí cuối cùng cách điểm xuất phát 3 bước phải và 2 bước xuống."
   },
   {
     id: "q2",
     level: "beginner",
-    text: "Kết quả 5 + 3 * 2 là?",
+    text: "Trong lập trình, nếu ta có phép tính:\n5 + 3 * 2\nKết quả là bao nhiêu?",
     choices: ["16", "11", "13", "10"],
     answerIndex: 1,
-    explain: "Nhân trước: 3*2=6; 5+6=11."
+    explain: "Theo thứ tự ưu tiên phép toán, nhân trước cộng sau: 3 * 2 = 6, sau đó 5 + 6 = 11."
   },
   {
     id: "q3",
     level: "intermediate",
-    text: "for i in range(3): print('Hello') in ra?",
-    choices: ["1 lần", "2 lần", "3 lần", "Vô hạn"],
+    text: "Đoạn code Python sau in ra gì?\nfor i in range(3):\n    print(\"Hello\")",
+    choices: [
+      "In ra \"Hello\" 1 lần",
+      "In ra \"Hello\" 2 lần", 
+      "In ra \"Hello\" 3 lần",
+      "In ra \"Hello\" vô hạn"
+    ],
     answerIndex: 2,
-    explain: "range(3) → 0,1,2 (3 lần)."
+    explain: "range(3) tạo ra dãy số từ 0 đến 2 (tổng cộng 3 số), nên vòng lặp chạy 3 lần và in ra \"Hello\" 3 lần."
   },
   {
     id: "q4",
     level: "intermediate",
-    text: "Làm máy tính bỏ túi cần?",
-    choices: ["Vòng lặp", "Nhập liệu & tính toán", "In ra màn hình", "Tất cả đúng"],
+    text: "Nếu muốn làm một máy tính bỏ túi bằng code, học sinh cần dùng kiến thức nào?",
+    choices: [
+      "Cách viết vòng lặp",
+      "Cách nhập dữ liệu và tính toán",
+      "Cách in ra màn hình",
+      "Tất cả các ý trên"
+    ],
     answerIndex: 3,
-    explain: "Kết hợp nhiều kiến thức."
+    explain: "Máy tính bỏ túi cần tất cả: vòng lặp để người dùng tiếp tục sử dụng, nhập dữ liệu để lấy phép tính, tính toán để xử lý, và in ra để hiển thị kết quả."
   },
   {
     id: "q5",
     level: "advanced",
-    text: "x=5; x=x+2; print(x) in ra?",
-    choices: ["2", "5", "7", "Lỗi"],
+    text: "Đoạn code Python sau cho kết quả gì?\nx = 5\nx = x + 2\nprint(x)",
+    choices: ["2", "5", "7", "Lỗi chương trình"],
     answerIndex: 2,
-    explain: "Gán lại x=7."
+    explain: "x ban đầu bằng 5, sau đó x được gán lại bằng x + 2 = 5 + 2 = 7, nên print(x) sẽ in ra 7."
   },
   {
     id: "q6",
-    level: "advanced",
-    text: "Tổng số lẻ trong [3,5,7,9] với if n%2==1?",
+    level: "advanced", 
+    text: "Bạn có một danh sách số:\nnumbers = [3, 5, 7, 9]\nNếu ta chạy đoạn code sau:\ntotal = 0\nfor n in numbers:\n    if n % 2 == 1:\n        total = total + n\nprint(total)\nKết quả in ra là gì?\n(Gợi ý: n % 2 == 1 nghĩa là số lẻ)",
     choices: ["24", "17", "9", "19"],
     answerIndex: 0,
-    explain: "3+5+7+9=24."
+    explain: "Tất cả các số 3, 5, 7, 9 đều là số lẻ (n % 2 == 1), nên total = 3 + 5 + 7 + 9 = 24."
   },
   {
     id: "q7",
     level: "advanced",
-    text: "Đoán số bí mật 1–10, đoán tới đúng: đoạn nào đúng?",
+    text: "Bạn muốn viết trò chơi \"Đoán số bí mật\" bằng Python.\nSố bí mật được tạo ra ngẫu nhiên từ 1 đến 10. Người chơi có thể đoán nhiều lần cho đến khi đúng.\nĐoạn code nào dưới đây là đúng nhất?",
     choices: [
-      "A (1 lần, số cố định)",
-      "B (randint, while tới đúng)",
-      "C (3 lần, không kiểm tra)",
-      "D (in số bí mật)"
+      "A: secret = 7; guess = int(input(\"Đoán số: \")); if guess == secret: print(\"Đúng!\")",
+      "B: import random; secret = random.randint(1, 10); guess = 0; while guess != secret: guess = int(input(\"Đoán số: \")); if guess == secret: print(\"Đúng rồi!\")",
+      "C: secret = 5; for i in range(3): guess = int(input(\"Đoán số: \")); print(\"Đúng!\")",
+      "D: secret = random.randint(1, 10); print(\"Đúng số bí mật là:\", secret)"
     ],
     answerIndex: 1,
-    explain: "B có random + vòng lặp."
+    explain: "Đáp án B đúng vì: có random để tạo số ngẫu nhiên, có vòng lặp while để cho phép đoán nhiều lần cho đến khi đúng, và kiểm tra điều kiện đúng."
   }
 ];
 

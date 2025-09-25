@@ -1,5 +1,8 @@
 import { CodingTestWizard } from "@/features/coding-test/components/CodingTestWizard";
 import { Helmet } from "react-helmet-async";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function CodingTest() {
   return (
@@ -16,6 +19,15 @@ export default function CodingTest() {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/test" />
       </Helmet>
+      
+      <div className="fixed top-4 left-4 z-10">
+        <Button variant="ghost" size="sm" asChild>
+          <Link to="/" className="flex items-center gap-2">
+            <ArrowLeft className="h-4 w-4" />
+            Về trang chủ
+          </Link>
+        </Button>
+      </div>
       
       <CodingTestWizard />
     </>
