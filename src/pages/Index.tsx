@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import CountdownTimer from "@/components/CountdownTimer";
 import heroBanner from "@/assets/hero-banner.jpg";
 import instructor1 from "@/assets/instructor-1.jpg";
 import studentProjects from "@/assets/student-projects.jpg";
@@ -102,10 +101,6 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground">
                   Xác định trình độ lập trình của con chỉ trong 5 phút – nhận ngay báo cáo kết quả & lộ trình học phù hợp.
                 </p>
-                
-                <div className="max-w-md">
-                  <CountdownTimer />
-                </div>
               </div>
             </div>
             
