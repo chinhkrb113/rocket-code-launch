@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import heroBanner from "@/assets/hero-banner.jpg";
 import instructor1 from "@/assets/instructor-1.jpg";
 import studentProjects from "@/assets/student-projects.jpg";
@@ -63,6 +65,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
+      
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div 
@@ -552,6 +556,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
