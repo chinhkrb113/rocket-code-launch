@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -64,7 +65,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background scroll-smooth">
       <Header />
       
       {/* Hero Section */}
@@ -174,8 +175,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Mini Test Section */}
-      <section className="py-20 px-4 bg-muted/30">
+      {/* Course Section */}
+      <section id="course" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-4xl">
           <Card className="shadow-large animate-scale-in">
             <CardHeader className="text-center">
@@ -334,7 +335,7 @@ const Index = () => {
       </section>
 
       {/* Instructors Section */}
-      <section className="py-20 px-4 bg-muted/30">
+      <section id="instructors" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16 animate-fade-up">
             <h2 className="text-4xl font-bold mb-6">
@@ -393,7 +394,7 @@ const Index = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 px-4">
+      <section id="pricing" className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <Card className="shadow-large bg-gradient-to-r from-primary/5 to-secondary/5">
             <CardHeader className="text-center">
@@ -437,7 +438,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 bg-muted/30">
+      <section id="testimonials" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16 animate-fade-up">
             <h2 className="text-4xl font-bold mb-6">
